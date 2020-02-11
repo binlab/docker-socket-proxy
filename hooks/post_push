@@ -10,16 +10,16 @@ case "$DOCKER_TAG" in
         TARGET_ARCH="amd64"
         ;;
     *arm32v5)
-        TARGET_ARCH="arm32v5"
+        TARGET_ARCH="arm/v5"
         ;;
     *arm32v6)
-        TARGET_ARCH="arm32v6"
+        TARGET_ARCH="arm/v6"
         ;;
     *arm32v7)
-        TARGET_ARCH="arm32v7"
+        TARGET_ARCH="arm/v7"
         ;;
     *arm64v8)
-        TARGET_ARCH="arm64v8"
+        TARGET_ARCH="arm64/v8"
         ;;
     *i386)
         TARGET_ARCH="i386"
