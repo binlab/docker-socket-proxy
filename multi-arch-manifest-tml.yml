@@ -1,6 +1,10 @@
 ---
 image: "{DOCKER_REPO}:{TAG_ROOT}"
 manifests:
+  - image: "{DOCKER_REPO}:{TAG_ROOT}"
+    platform:
+      architecture: amd64
+      os: linux
   - image: "{DOCKER_REPO}:{TAG_ROOT}-amd64"
     platform:
       architecture: amd64
