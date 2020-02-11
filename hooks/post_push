@@ -9,4 +9,4 @@ curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download
 chmod +x manifest-tool
 
 sed "s#{IMAGE_NAME}#${IMAGE_NAME%:*}#" multi-arch-manifest-tmpl.yaml > multi-arch-manifest.yml
-./manifest-tool push from-spec multi-arch-manifest.yml
+./manifest-tool push from-spec --ignore-missing multi-arch-manifest.yml
