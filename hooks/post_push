@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# source: https://github.com/ckulka/docker-multi-arch-example
+
+# Use manifest-tool to create the manifest, given the experimental
+# "docker manifest" command isn't available yet on Docker Hub.
+
+curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.9.0/manifest-tool-linux-amd64
+chmod +x manifest-tool
+
+sed "s#{IMAGE_NAME}#${IMAGE_NAME%:*}#" multi-arch-manifest-tmpl.yaml > multi-arch-manifest.yml
+./manifest-tool push from-spec multi-arch-manifest.yml
