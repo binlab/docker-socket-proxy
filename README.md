@@ -1,6 +1,7 @@
 # Docker Socket Proxy
 
-# ENV needed for Watchtower
+## ENV needed for Watchtower
+```
 CONTAINERS=1
 IMAGES=1
 POST=1
@@ -15,6 +16,7 @@ IMAGES_CREATE=1
 IMAGES_DELETE=1
 CONTAINERS_START=1
 CONTAINERS_EXEC=1
+```
 
 ## What?
 
