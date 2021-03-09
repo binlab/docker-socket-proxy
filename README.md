@@ -1,9 +1,6 @@
 # Docker Socket Proxy
 
-[![](https://images.microbadger.com/badges/version/tecnativa/docker-socket-proxy:latest.svg)](https://microbadger.com/images/tecnativa/docker-socket-proxy:latest "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/tecnativa/docker-socket-proxy:latest.svg)](https://microbadger.com/images/tecnativa/docker-socket-proxy:latest "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/commit/tecnativa/docker-socket-proxy:latest.svg)](https://microbadger.com/images/tecnativa/docker-socket-proxy:latest "Get your own commit badge on microbadger.com")
-[![](https://images.microbadger.com/badges/license/tecnativa/docker-socket-proxy.svg)](https://microbadger.com/images/tecnativa/docker-socket-proxy "Get your own license badge on microbadger.com")
+This fork tries to provide an up to date version of [fluencelabs/docker-socket-proxy](https://github.com/fluencelabs/docker-socket-proxy).
 
 ## What?
 
