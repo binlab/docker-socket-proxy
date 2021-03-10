@@ -2,7 +2,48 @@
 
 This fork tries to provide an even more granular approach to the [original](tecnativa/docker-socket-proxy) and [fluencelab's fork](https://github.com/fluencelabs/docker-socket-proxy).
 
-Fluencelab's fork has a quirk, if you do not set `POST=1` or `DELETE=1`, all `POST` and `DELETE` requests will not work no matter what. This is not documented in their repository.
+*Fluencelab's fork has a quirk, if you do not set `POST=1` or `DELETE=1`, all `POST` and `DELETE` requests will not work no matter what. This is not documented in their repository.*
+
+## Quickstart
+
+*TIP: if you don't do `POST` or `DELETE` requests, you can set the socket to read-only for extra security.*
+
+### Preset for [traefik](https://hub.docker.com/_/traefik) (docker-compose)
+
+```yaml
+#...
+services:
+  traefik-docker-proxy:
+    image: quiexotic/docker-socket-proxy
+    restart: unless-stopped
+    environment:
+      GET_CONTAINERS: 1
+    networks:
+      traefik-network:
+    volumes:
+      - /var/run/docker.socket:/var/run/docker.sock:ro
+#...
+```
+- `traefik-network` is the network shared with the traefik service.
+
+### Preset for [robbertkl/ipv6nat](https://hub.docker.com/r/robbertkl/ipv6nat) (docker-compose)
+
+```yaml
+#...
+services:
+  ipv6-nat-docker-proxy:
+    image: quiexotic/docker-socket-proxy
+    restart: unless-stopped
+    environment:
+      GET_CONTAINERS: 1
+      GET_NETWORKS: 1
+    networks:
+      ipv6-nat-network:
+    volumes:
+      - /var/run/docker.socket:/var/run/docker.sock:ro
+#...
+```
+- `ipv6-nat-network` is the network shared with the ipv6nat service.
 
 ## What?
 
