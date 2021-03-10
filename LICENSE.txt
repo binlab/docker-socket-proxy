@@ -187,7 +187,9 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [yyyy] [name of copyright owner]
+   Copyright 2020 github.com/tecnativa/docker-socket-proxy
+   Copyright 2020 github.com/fluencelabs/docker-socket-proxy
+   Copyright 2021 Hellyna NG <me@hellyna.com>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

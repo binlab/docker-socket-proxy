@@ -1,4 +1,6 @@
-# Docker Socket Proxy
+# hellyna/docker-socket-proxy
+
+This fork tries to provide an even more granular approach to the [original](tecnativa/docker-socket-proxy) and [fluencelab's fork](https://github.com/fluencelabs/docker-socket-proxy).
 
 This fork tries to provide an up to date version of [fluencelabs/docker-socket-proxy](https://github.com/fluencelabs/docker-socket-proxy).
 
@@ -37,14 +39,16 @@ requests that should never happen.
 
 ## Usage
 
-1.  Run the API proxy (`--privileged` flag is required here because it connects with the docker socket, which is a privileged connection in some SELinux/AppArmor contexts and would get locked otherwise):
+1.  Run the API proxy
 
         $ docker container run \
-            -d --privileged \
+            -d \
             --name dockerproxy \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -p 127.0.0.1:2375:2375 \
             tecnativa/docker-socket-proxy
+
+    The `--privileged` flag may be required here if you use SELinux or AppArmor.
 
 2.  Connect your local docker client to that socket:
 
@@ -98,9 +102,10 @@ Possible values for these variables:
 These API sections are mostly harmless and almost required for any service that
 uses the API, so they are granted by default.
 
-- `EVENTS`
-- `PING`
-- `VERSION`
+- `HEAD_PING`
+- `GET_PING`
+- `GET_EVENTS`
+- `GET_VERSION`
 
 ### Access revoked by default
 
@@ -111,44 +116,48 @@ by default. Maximum caution when enabling these.
 
 - `AUTH`
 - `SECRETS`
-- `POST`: When disabled, only `GET` and `HEAD` operations are allowed, meaning
-  any section of the API is read-only. Note that this is a global 
-- `DELETE`: Enables or disables all `DELETE` operations
+- `POST_ALL`: Enables all POST operations
+- `DELETE_ALL`: Enables all DELETE operations
 
 #### Not always needed
 
-You will possibly need to grant access to some of these API sections, which 
+You will possibly need to grant access to some of these API sections, which
 can expose some information that your service does not need.
 
-| GET            | POST                  | DELETE              |
-|:---------------|:----------------------|:--------------------|
-| `BUILD`        | `ALLOW_RESTARTS`      | `NETWORKS_DELETE`   |  
-| `COMMIT`       | `CONTAINERS_PRUNE`    | `CONTAINERS_DELETE` |    
-| `CONFIGS`      | `CONTAINERS_CREATE`   | `IMAGES_DELETE`     |
-| `CONTAINERS`   | `CONTAINERS_RESIZE`   | `VOLUMES_DELETE`    | 
-| `DISTRIBUTION` | `CONTAINERS_START`    |                     |
-| `EXEC`         | `CONTAINERS_UPDATE`   |                     |
-| `IMAGES`       | `CONTAINERS_RENAME`   |                     |
-| `INFO`         | `CONTAINERS_PAUSE`    |                     |
-| `NETWORKS`     | `CONTAINERS_UNPAUSE`  |                     |
-| `NODES`        | `CONTAINERS_ATTACH`   |                     |
-| `PLUGINS`      | `CONTAINERS_WAIT`     |                     |
-| `SERVICES`     | `CONTAINERS_EXEC`     |                     |
-| `SESSION`      | `VOLUMES_CREATE`      |                     |
-| `SWARM`        | `VOLUMES_PRUNE`       |                     |
-| `SYSTEM`       | `NETWORKS_CREATE`     |                     |
-| `TASKS`        | `NETWORKS_PRUNE`      |                     |
-| `VOLUMES`      | `NETWORKS_CONNECT`    |                     |
-|                | `NETWORKS_DISCONNECT` |                     |
-|                | `IMAGES_CREATE`       |                     |
-|                | `IMAGES_PRUNE`        |                     |
+A good way is to run your application that you want to filter with with `POST_ALL`
+and `DELETE_ALL` set to `1` connected to this proxy, then check the logs after to know
+which are the ones you need to allow.
 
-`ALLOW_RESTARTS` allows to `kill`, `stop` and `restart` containers
+| HEAD | GET            | POST                  | DELETE              |
+|:-----|:---------------|:----------------------|:--------------------|
+
+| `HEAD_PING` | `GET_BUILD`        |  `POST_CONTAINERS_PRUNE`   | `NETWORKS_DELETE`   |
+|             | `GET_COMMIT`       |  `POST_CONTAINERS_CREATE`  | `CONTAINERS_DELETE` |
+|             | `GET_CONFIGS`      |  `POST_CONTAINERS_RESIZE`  | `IMAGES_DELETE`     |
+|             | `GET_CONTAINERS`   |  `POST_CONTAINERS_START`   | `VOLUMES_DELETE`    |
+|             | `GET_DISTRIBUTION` |  `POST_CONTAINERS_STOP`    |                     |
+|             | `GET_EXEC`         |  `POST_CONTAINERS_RESTART` |                     |
+|             | `GET_IMAGES`       |  `POST_CONTAINERS_KILL`    |                     |
+|             | `GET_INFO`         |  `POST_CONTAINERS_UPDATE`  |                     |
+|             | `GET_NETWORKS`     |  `POST_CONTAINERS_RENAME`  |                     |
+|             | `GET_NODES`        |  `POST_CONTAINERS_PAUSE`   |                     |
+|             | `GET_PLUGINS`      |  `POST_CONTAINERS_UNPAUSE` |                     |
+|             | `GET_SERVICES`     |  `POST_CONTAINERS_ATTACH`  |                     |
+|             | `GET_SESSION`      |  `POST_CONTAINERS_WAIT`    |                     |
+|             | `GET_SWARM`        |  `POST_CONTAINERS_EXEC`    |                     |
+|             | `GET_SYSTEM`       |  `POST_VOLUMES_CREATE`     |                     |
+|             | `GET_TASKS`        |  `POST_VOLUMES_PRUNE`      |                     |
+|             | `GET_VOLUMES`      |  `POST_NETWORKS_CREATE`    |                     |
+|             |                    |  `POST_NETWORKS_PRUNE`     |                     |
+|             |                    |  `POST_NETWORKS_CONNECT`   |                     |
+|             |                    |  `POST_NETWORKS_DISCONNECT`|                     |
+|             |                    |  `POST_IMAGES_CREATE`      |                     |
+|             |                    |  `POST_IMAGES_PRUNE`       |                     |
 
 ## Logging
 
 You can set the logging level or severity level of the messages to be logged with the
- environment variable `LOG_LEVEL`. Defaul value is info. Possible values are: debug, 
+ environment variable `LOG_LEVEL`. Defaul value is info. Possible values are: debug,
  info, notice, warning, err, crit, alert and emerg.
 
 ## Supported API versions
@@ -159,10 +168,6 @@ You can set the logging level or severity level of the messages to be logged wit
 - [1.30](https://docs.docker.com/engine/api/v1.30/)
 - [1.37](https://docs.docker.com/engine/api/v1.37/)
 
-## Feedback
+Please open any PR if you find an error or require support to a specific version of API.
 
-Please send any feedback (issues, questions) to the [issue tracker][].
-
-[Alpine]: https://alpinelinux.org/
-[HAProxy]: http://www.haproxy.org/
-[issue tracker]: https://github.com/Tecnativa/docker-socket-proxy/issues
+Useful link: [API version history](https://docs.docker.com/engine/api/version-history/)
