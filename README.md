@@ -2,8 +2,6 @@
 
 This fork tries to provide an even more granular approach to the [original](tecnativa/docker-socket-proxy) and [fluencelab's fork](https://github.com/fluencelabs/docker-socket-proxy).
 
-This fork tries to provide an up to date version of [fluencelabs/docker-socket-proxy](https://github.com/fluencelabs/docker-socket-proxy).
-
 ## What?
 
 This is a security-enhanced proxy for the Docker Socket.
