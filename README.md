@@ -2,6 +2,8 @@
 
 This fork tries to provide an even more granular approach to the [original](tecnativa/docker-socket-proxy) and [fluencelab's fork](https://github.com/fluencelabs/docker-socket-proxy).
 
+Fluencelab's fork has a quirk, if you do not set `POST=1` or `DELETE=1`, all `POST` and `DELETE` requests will not work no matter what. This is not documented in their repository.
+
 ## What?
 
 This is a security-enhanced proxy for the Docker Socket.
