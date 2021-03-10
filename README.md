@@ -130,7 +130,6 @@ which are the ones you need to allow.
 
 | HEAD | GET            | POST                  | DELETE              |
 |:-----|:---------------|:----------------------|:--------------------|
-
 | `HEAD_PING` | `GET_BUILD`        |  `POST_CONTAINERS_PRUNE`   | `NETWORKS_DELETE`   |
 |             | `GET_COMMIT`       |  `POST_CONTAINERS_CREATE`  | `CONTAINERS_DELETE` |
 |             | `GET_CONFIGS`      |  `POST_CONTAINERS_RESIZE`  | `IMAGES_DELETE`     |
