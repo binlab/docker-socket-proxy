@@ -130,10 +130,10 @@ which are the ones you need to allow.
 
 | HEAD | GET            | POST                  | DELETE              |
 |:-----|:---------------|:----------------------|:--------------------|
-| `HEAD_PING` | `GET_BUILD`        |  `POST_CONTAINERS_PRUNE`   | `NETWORKS_DELETE`   |
-|             | `GET_COMMIT`       |  `POST_CONTAINERS_CREATE`  | `CONTAINERS_DELETE` |
-|             | `GET_CONFIGS`      |  `POST_CONTAINERS_RESIZE`  | `IMAGES_DELETE`     |
-|             | `GET_CONTAINERS`   |  `POST_CONTAINERS_START`   | `VOLUMES_DELETE`    |
+| `HEAD_PING` | `GET_BUILD`        |  `POST_CONTAINERS_PRUNE`   | `DELETE_NETWORKS`   |
+|             | `GET_COMMIT`       |  `POST_CONTAINERS_CREATE`  | `DELETE_CONTAINERS` |
+|             | `GET_CONFIGS`      |  `POST_CONTAINERS_RESIZE`  | `DELETE_IMAGES`     |
+|             | `GET_CONTAINERS`   |  `POST_CONTAINERS_START`   | `DELETE_VOLUMES`    |
 |             | `GET_DISTRIBUTION` |  `POST_CONTAINERS_STOP`    |                     |
 |             | `GET_EXEC`         |  `POST_CONTAINERS_RESTART` |                     |
 |             | `GET_IMAGES`       |  `POST_CONTAINERS_KILL`    |                     |
