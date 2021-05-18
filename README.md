@@ -1,5 +1,11 @@
 # hellyna/docker-socket-proxy
 
+**Upstream changes**
+
+*Note: the 2.4+ versions of the container will run as USER haproxy by default (hence the --sysctl net.ipv4.ip_unprivileged_port_start=0 above), but older versions still default to root for compatibility reasons; use --user haproxy (or any other UID) if you want to run as non-root in older versions.*
+
+With these changes to upstream, we'll need to run this image with `--user root` to make it all work again.
+
 This fork tries to provide an even more granular approach to the [original](https://github.com/tecnativa/docker-socket-proxy) and [fluencelab's fork](https://github.com/fluencelabs/docker-socket-proxy).
 
 *Fluencelab's fork has a quirk, if you do not set `POST=1` or `DELETE=1`, all `POST` and `DELETE` requests will not work no matter what. This is not documented in their repository.*
