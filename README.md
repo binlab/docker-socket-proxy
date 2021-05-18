@@ -64,7 +64,7 @@ those services should not do.
 
 ## How?
 
-We use the official [Alpine][]-based [HAProxy][] image with a small
+We use the official [Alpine](https://hub.docker.com/_/alpine)-based [HAProxy](https://hub.docker.com/_/haproxy) image with a small
 configuration file.
 
 It blocks access to the Docker socket API according to the environment
