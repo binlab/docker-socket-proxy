@@ -1,10 +1,10 @@
 # hellyna/docker-socket-proxy
 
-**Upstream changes**
+**Upstream changes from [haproxy](https://hub.docker.com/_/haproxy)**
 
-*Note: the 2.4+ versions of the container will run as USER haproxy by default (hence the --sysctl net.ipv4.ip_unprivileged_port_start=0 above), but older versions still default to root for compatibility reasons; use --user haproxy (or any other UID) if you want to run as non-root in older versions.*
+> Note: the 2.4+ versions of the container will run as USER haproxy by default (hence the --sysctl net.ipv4.ip_unprivileged_port_start=0 above), but older versions still default to root for compatibility reasons; use --user haproxy (or any other UID) if you want to run as non-root in older versions.
 
-With these changes to upstream, we'll need to run this image with `--user root` to make it all work again.
+With these changes in mind, we'll need to run this image with `--user root` to make it all work again.
 
 This fork tries to provide an even more granular approach to the [original](https://github.com/tecnativa/docker-socket-proxy) and [fluencelab's fork](https://github.com/fluencelabs/docker-socket-proxy).
 
