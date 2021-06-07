@@ -6,6 +6,7 @@ on:
     branches: [ master ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
+
   pull_request:
     branches: [ master ]
 
@@ -49,7 +50,7 @@ jobs:
         id: docker-io-meta
         uses: docker/metadata-action@v3
         with:
-          images: docker.io/quiexotic/ddocker-socket-proxy
+          images: docker.io/quiexotic/docker-socket-proxy
 
       - name: Build and push Docker image to ghcr.io
         uses: docker/build-push-action@v2
