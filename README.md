@@ -1,6 +1,10 @@
 # hellyna/docker-socket-proxy
 
+*This image is automatically updated every 6 hours*
+
 [![Docker](https://github.com/Hellyna/docker-socket-proxy/actions/workflows/github-publish.yml/badge.svg)](https://github.com/Hellyna/docker-socket-proxy/actions/workflows/github-publish.yml)
+
+Available tags: `latest`
 
 **Upstream changes from [haproxy](https://hub.docker.com/_/haproxy)**
 
