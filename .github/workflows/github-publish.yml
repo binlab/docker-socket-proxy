@@ -56,3 +56,6 @@ jobs:
       - name: Run build and push
         if: github.event_name != 'pull_request'
         run: ./.github/workflows/docker-build --tag ${{ steps.vars.outputs.short_ref }} push
+        
+      - name: Cleanup stray docker images
+        run: docker image prune -f
